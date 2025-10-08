@@ -7,6 +7,12 @@
 },
 {
   "directory": "/Users/happ1s/Documents/cg-labs/build-debug",
+  "command": "/usr/bin/c++ -I/Users/happ1s/Documents/cg-labs/include -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/imgui-src -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/imgui-src/backends -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/include -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/vk-bootstrap-src/src -isystem /Users/happ1s/VulkanSDK/1.4.321.0/macOS/include -g -std=gnu++20 -arch arm64 -o CMakeFiles/veekay.dir/source/Cylinder.cpp.o -c /Users/happ1s/Documents/cg-labs/source/Cylinder.cpp",
+  "file": "/Users/happ1s/Documents/cg-labs/source/Cylinder.cpp",
+  "output": "/Users/happ1s/Documents/cg-labs/build-debug/CMakeFiles/veekay.dir/source/Cylinder.cpp.o"
+},
+{
+  "directory": "/Users/happ1s/Documents/cg-labs/build-debug",
   "command": "/usr/bin/c++ -I/Users/happ1s/Documents/cg-labs/include -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/imgui-src -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/imgui-src/backends -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/include -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/vk-bootstrap-src/src -isystem /Users/happ1s/VulkanSDK/1.4.321.0/macOS/include -g -std=gnu++20 -arch arm64 -o CMakeFiles/veekay.dir/_deps/imgui-src/backends/imgui_impl_glfw.cpp.o -c /Users/happ1s/Documents/cg-labs/build-debug/_deps/imgui-src/backends/imgui_impl_glfw.cpp",
   "file": "/Users/happ1s/Documents/cg-labs/build-debug/_deps/imgui-src/backends/imgui_impl_glfw.cpp",
   "output": "/Users/happ1s/Documents/cg-labs/build-debug/CMakeFiles/veekay.dir/_deps/imgui-src/backends/imgui_impl_glfw.cpp.o"
