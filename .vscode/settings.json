@@ -1,0 +1,11 @@
+{
+  "cmake.configureArgs": [
+    "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON",
+    "-DVulkan_LIBRARY=/Users/happ1s/VulkanSDK/1.4.321.0/macOS/lib/libvulkan.dylib",
+    "-DVulkan_INCLUDE_DIR=/Users/happ1s/VulkanSDK/1.4.321.0/macOS/include"
+  ],
+
+  // Use compileCommands to provide include directories to the linter.
+  "cmake.copyCompileCommands": "${workspaceFolder}/compile_commands.json",
+  "C_Cpp.default.compileCommands": "${workspaceFolder}/compile_commands.json"
+}

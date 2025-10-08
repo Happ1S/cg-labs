@@ -1,0 +1,182 @@
+[
+{
+  "directory": "/Users/happ1s/Documents/cg-labs/build-debug",
+  "command": "/usr/bin/c++ -I/Users/happ1s/Documents/cg-labs/include -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/imgui-src -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/imgui-src/backends -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/include -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/vk-bootstrap-src/src -isystem /Users/happ1s/VulkanSDK/1.4.321.0/macOS/include -g -std=gnu++20 -arch arm64 -o CMakeFiles/veekay.dir/source/veekay.cpp.o -c /Users/happ1s/Documents/cg-labs/source/veekay.cpp",
+  "file": "/Users/happ1s/Documents/cg-labs/source/veekay.cpp",
+  "output": "/Users/happ1s/Documents/cg-labs/build-debug/CMakeFiles/veekay.dir/source/veekay.cpp.o"
+},
+{
+  "directory": "/Users/happ1s/Documents/cg-labs/build-debug",
+  "command": "/usr/bin/c++ -I/Users/happ1s/Documents/cg-labs/include -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/imgui-src -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/imgui-src/backends -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/include -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/vk-bootstrap-src/src -isystem /Users/happ1s/VulkanSDK/1.4.321.0/macOS/include -g -std=gnu++20 -arch arm64 -o CMakeFiles/veekay.dir/_deps/imgui-src/backends/imgui_impl_glfw.cpp.o -c /Users/happ1s/Documents/cg-labs/build-debug/_deps/imgui-src/backends/imgui_impl_glfw.cpp",
+  "file": "/Users/happ1s/Documents/cg-labs/build-debug/_deps/imgui-src/backends/imgui_impl_glfw.cpp",
+  "output": "/Users/happ1s/Documents/cg-labs/build-debug/CMakeFiles/veekay.dir/_deps/imgui-src/backends/imgui_impl_glfw.cpp.o"
+},
+{
+  "directory": "/Users/happ1s/Documents/cg-labs/build-debug",
+  "command": "/usr/bin/c++ -I/Users/happ1s/Documents/cg-labs/include -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/imgui-src -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/imgui-src/backends -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/include -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/vk-bootstrap-src/src -isystem /Users/happ1s/VulkanSDK/1.4.321.0/macOS/include -g -std=gnu++20 -arch arm64 -o CMakeFiles/veekay.dir/_deps/imgui-src/backends/imgui_impl_vulkan.cpp.o -c /Users/happ1s/Documents/cg-labs/build-debug/_deps/imgui-src/backends/imgui_impl_vulkan.cpp",
+  "file": "/Users/happ1s/Documents/cg-labs/build-debug/_deps/imgui-src/backends/imgui_impl_vulkan.cpp",
+  "output": "/Users/happ1s/Documents/cg-labs/build-debug/CMakeFiles/veekay.dir/_deps/imgui-src/backends/imgui_impl_vulkan.cpp.o"
+},
+{
+  "directory": "/Users/happ1s/Documents/cg-labs/build-debug",
+  "command": "/usr/bin/c++ -I/Users/happ1s/Documents/cg-labs/include -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/imgui-src -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/imgui-src/backends -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/include -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/vk-bootstrap-src/src -isystem /Users/happ1s/VulkanSDK/1.4.321.0/macOS/include -g -std=gnu++20 -arch arm64 -o CMakeFiles/veekay.dir/_deps/imgui-src/imgui.cpp.o -c /Users/happ1s/Documents/cg-labs/build-debug/_deps/imgui-src/imgui.cpp",
+  "file": "/Users/happ1s/Documents/cg-labs/build-debug/_deps/imgui-src/imgui.cpp",
+  "output": "/Users/happ1s/Documents/cg-labs/build-debug/CMakeFiles/veekay.dir/_deps/imgui-src/imgui.cpp.o"
+},
+{
+  "directory": "/Users/happ1s/Documents/cg-labs/build-debug",
+  "command": "/usr/bin/c++ -I/Users/happ1s/Documents/cg-labs/include -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/imgui-src -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/imgui-src/backends -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/include -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/vk-bootstrap-src/src -isystem /Users/happ1s/VulkanSDK/1.4.321.0/macOS/include -g -std=gnu++20 -arch arm64 -o CMakeFiles/veekay.dir/_deps/imgui-src/imgui_draw.cpp.o -c /Users/happ1s/Documents/cg-labs/build-debug/_deps/imgui-src/imgui_draw.cpp",
+  "file": "/Users/happ1s/Documents/cg-labs/build-debug/_deps/imgui-src/imgui_draw.cpp",
+  "output": "/Users/happ1s/Documents/cg-labs/build-debug/CMakeFiles/veekay.dir/_deps/imgui-src/imgui_draw.cpp.o"
+},
+{
+  "directory": "/Users/happ1s/Documents/cg-labs/build-debug",
+  "command": "/usr/bin/c++ -I/Users/happ1s/Documents/cg-labs/include -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/imgui-src -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/imgui-src/backends -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/include -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/vk-bootstrap-src/src -isystem /Users/happ1s/VulkanSDK/1.4.321.0/macOS/include -g -std=gnu++20 -arch arm64 -o CMakeFiles/veekay.dir/_deps/imgui-src/imgui_tables.cpp.o -c /Users/happ1s/Documents/cg-labs/build-debug/_deps/imgui-src/imgui_tables.cpp",
+  "file": "/Users/happ1s/Documents/cg-labs/build-debug/_deps/imgui-src/imgui_tables.cpp",
+  "output": "/Users/happ1s/Documents/cg-labs/build-debug/CMakeFiles/veekay.dir/_deps/imgui-src/imgui_tables.cpp.o"
+},
+{
+  "directory": "/Users/happ1s/Documents/cg-labs/build-debug",
+  "command": "/usr/bin/c++ -I/Users/happ1s/Documents/cg-labs/include -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/imgui-src -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/imgui-src/backends -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/include -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/vk-bootstrap-src/src -isystem /Users/happ1s/VulkanSDK/1.4.321.0/macOS/include -g -std=gnu++20 -arch arm64 -o CMakeFiles/veekay.dir/_deps/imgui-src/imgui_widgets.cpp.o -c /Users/happ1s/Documents/cg-labs/build-debug/_deps/imgui-src/imgui_widgets.cpp",
+  "file": "/Users/happ1s/Documents/cg-labs/build-debug/_deps/imgui-src/imgui_widgets.cpp",
+  "output": "/Users/happ1s/Documents/cg-labs/build-debug/CMakeFiles/veekay.dir/_deps/imgui-src/imgui_widgets.cpp.o"
+},
+{
+  "directory": "/Users/happ1s/Documents/cg-labs/build-debug",
+  "command": "/usr/bin/cc -D_GLFW_COCOA -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/include -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-build/src -g -std=c99 -arch arm64 -fPIC -Wall -o _deps/glfw-build/src/CMakeFiles/glfw.dir/context.c.o -c /Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src/context.c",
+  "file": "/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src/context.c",
+  "output": "/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-build/src/CMakeFiles/glfw.dir/context.c.o"
+},
+{
+  "directory": "/Users/happ1s/Documents/cg-labs/build-debug",
+  "command": "/usr/bin/cc -D_GLFW_COCOA -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/include -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-build/src -g -std=c99 -arch arm64 -fPIC -Wall -o _deps/glfw-build/src/CMakeFiles/glfw.dir/init.c.o -c /Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src/init.c",
+  "file": "/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src/init.c",
+  "output": "/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-build/src/CMakeFiles/glfw.dir/init.c.o"
+},
+{
+  "directory": "/Users/happ1s/Documents/cg-labs/build-debug",
+  "command": "/usr/bin/cc -D_GLFW_COCOA -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/include -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-build/src -g -std=c99 -arch arm64 -fPIC -Wall -o _deps/glfw-build/src/CMakeFiles/glfw.dir/input.c.o -c /Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src/input.c",
+  "file": "/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src/input.c",
+  "output": "/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-build/src/CMakeFiles/glfw.dir/input.c.o"
+},
+{
+  "directory": "/Users/happ1s/Documents/cg-labs/build-debug",
+  "command": "/usr/bin/cc -D_GLFW_COCOA -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/include -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-build/src -g -std=c99 -arch arm64 -fPIC -Wall -o _deps/glfw-build/src/CMakeFiles/glfw.dir/monitor.c.o -c /Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src/monitor.c",
+  "file": "/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src/monitor.c",
+  "output": "/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-build/src/CMakeFiles/glfw.dir/monitor.c.o"
+},
+{
+  "directory": "/Users/happ1s/Documents/cg-labs/build-debug",
+  "command": "/usr/bin/cc -D_GLFW_COCOA -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/include -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-build/src -g -std=c99 -arch arm64 -fPIC -Wall -o _deps/glfw-build/src/CMakeFiles/glfw.dir/platform.c.o -c /Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src/platform.c",
+  "file": "/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src/platform.c",
+  "output": "/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-build/src/CMakeFiles/glfw.dir/platform.c.o"
+},
+{
+  "directory": "/Users/happ1s/Documents/cg-labs/build-debug",
+  "command": "/usr/bin/cc -D_GLFW_COCOA -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/include -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-build/src -g -std=c99 -arch arm64 -fPIC -Wall -o _deps/glfw-build/src/CMakeFiles/glfw.dir/vulkan.c.o -c /Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src/vulkan.c",
+  "file": "/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src/vulkan.c",
+  "output": "/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-build/src/CMakeFiles/glfw.dir/vulkan.c.o"
+},
+{
+  "directory": "/Users/happ1s/Documents/cg-labs/build-debug",
+  "command": "/usr/bin/cc -D_GLFW_COCOA -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/include -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-build/src -g -std=c99 -arch arm64 -fPIC -Wall -o _deps/glfw-build/src/CMakeFiles/glfw.dir/window.c.o -c /Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src/window.c",
+  "file": "/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src/window.c",
+  "output": "/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-build/src/CMakeFiles/glfw.dir/window.c.o"
+},
+{
+  "directory": "/Users/happ1s/Documents/cg-labs/build-debug",
+  "command": "/usr/bin/cc -D_GLFW_COCOA -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/include -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-build/src -g -std=c99 -arch arm64 -fPIC -Wall -o _deps/glfw-build/src/CMakeFiles/glfw.dir/egl_context.c.o -c /Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src/egl_context.c",
+  "file": "/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src/egl_context.c",
+  "output": "/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-build/src/CMakeFiles/glfw.dir/egl_context.c.o"
+},
+{
+  "directory": "/Users/happ1s/Documents/cg-labs/build-debug",
+  "command": "/usr/bin/cc -D_GLFW_COCOA -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/include -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-build/src -g -std=c99 -arch arm64 -fPIC -Wall -o _deps/glfw-build/src/CMakeFiles/glfw.dir/osmesa_context.c.o -c /Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src/osmesa_context.c",
+  "file": "/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src/osmesa_context.c",
+  "output": "/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-build/src/CMakeFiles/glfw.dir/osmesa_context.c.o"
+},
+{
+  "directory": "/Users/happ1s/Documents/cg-labs/build-debug",
+  "command": "/usr/bin/cc -D_GLFW_COCOA -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/include -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-build/src -g -std=c99 -arch arm64 -fPIC -Wall -o _deps/glfw-build/src/CMakeFiles/glfw.dir/null_init.c.o -c /Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src/null_init.c",
+  "file": "/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src/null_init.c",
+  "output": "/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-build/src/CMakeFiles/glfw.dir/null_init.c.o"
+},
+{
+  "directory": "/Users/happ1s/Documents/cg-labs/build-debug",
+  "command": "/usr/bin/cc -D_GLFW_COCOA -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/include -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-build/src -g -std=c99 -arch arm64 -fPIC -Wall -o _deps/glfw-build/src/CMakeFiles/glfw.dir/null_monitor.c.o -c /Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src/null_monitor.c",
+  "file": "/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src/null_monitor.c",
+  "output": "/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-build/src/CMakeFiles/glfw.dir/null_monitor.c.o"
+},
+{
+  "directory": "/Users/happ1s/Documents/cg-labs/build-debug",
+  "command": "/usr/bin/cc -D_GLFW_COCOA -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/include -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-build/src -g -std=c99 -arch arm64 -fPIC -Wall -o _deps/glfw-build/src/CMakeFiles/glfw.dir/null_window.c.o -c /Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src/null_window.c",
+  "file": "/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src/null_window.c",
+  "output": "/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-build/src/CMakeFiles/glfw.dir/null_window.c.o"
+},
+{
+  "directory": "/Users/happ1s/Documents/cg-labs/build-debug",
+  "command": "/usr/bin/cc -D_GLFW_COCOA -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/include -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-build/src -g -std=c99 -arch arm64 -fPIC -Wall -o _deps/glfw-build/src/CMakeFiles/glfw.dir/null_joystick.c.o -c /Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src/null_joystick.c",
+  "file": "/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src/null_joystick.c",
+  "output": "/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-build/src/CMakeFiles/glfw.dir/null_joystick.c.o"
+},
+{
+  "directory": "/Users/happ1s/Documents/cg-labs/build-debug",
+  "command": "/usr/bin/cc -D_GLFW_COCOA -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/include -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-build/src -g -std=c99 -arch arm64 -fPIC -Wall -o _deps/glfw-build/src/CMakeFiles/glfw.dir/cocoa_time.c.o -c /Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src/cocoa_time.c",
+  "file": "/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src/cocoa_time.c",
+  "output": "/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-build/src/CMakeFiles/glfw.dir/cocoa_time.c.o"
+},
+{
+  "directory": "/Users/happ1s/Documents/cg-labs/build-debug",
+  "command": "/usr/bin/cc -D_GLFW_COCOA -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/include -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-build/src -g -std=c99 -arch arm64 -fPIC -Wall -o _deps/glfw-build/src/CMakeFiles/glfw.dir/posix_module.c.o -c /Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src/posix_module.c",
+  "file": "/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src/posix_module.c",
+  "output": "/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-build/src/CMakeFiles/glfw.dir/posix_module.c.o"
+},
+{
+  "directory": "/Users/happ1s/Documents/cg-labs/build-debug",
+  "command": "/usr/bin/cc -D_GLFW_COCOA -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/include -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-build/src -g -std=c99 -arch arm64 -fPIC -Wall -o _deps/glfw-build/src/CMakeFiles/glfw.dir/posix_thread.c.o -c /Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src/posix_thread.c",
+  "file": "/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src/posix_thread.c",
+  "output": "/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-build/src/CMakeFiles/glfw.dir/posix_thread.c.o"
+},
+{
+  "directory": "/Users/happ1s/Documents/cg-labs/build-debug",
+  "command": "/usr/bin/cc -D_GLFW_COCOA -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/include -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-build/src -g -std=c99 -arch arm64 -fPIC -Wall -o _deps/glfw-build/src/CMakeFiles/glfw.dir/cocoa_init.m.o -c /Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src/cocoa_init.m",
+  "file": "/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src/cocoa_init.m",
+  "output": "/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-build/src/CMakeFiles/glfw.dir/cocoa_init.m.o"
+},
+{
+  "directory": "/Users/happ1s/Documents/cg-labs/build-debug",
+  "command": "/usr/bin/cc -D_GLFW_COCOA -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/include -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-build/src -g -std=c99 -arch arm64 -fPIC -Wall -o _deps/glfw-build/src/CMakeFiles/glfw.dir/cocoa_joystick.m.o -c /Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src/cocoa_joystick.m",
+  "file": "/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src/cocoa_joystick.m",
+  "output": "/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-build/src/CMakeFiles/glfw.dir/cocoa_joystick.m.o"
+},
+{
+  "directory": "/Users/happ1s/Documents/cg-labs/build-debug",
+  "command": "/usr/bin/cc -D_GLFW_COCOA -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/include -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-build/src -g -std=c99 -arch arm64 -fPIC -Wall -o _deps/glfw-build/src/CMakeFiles/glfw.dir/cocoa_monitor.m.o -c /Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src/cocoa_monitor.m",
+  "file": "/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src/cocoa_monitor.m",
+  "output": "/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-build/src/CMakeFiles/glfw.dir/cocoa_monitor.m.o"
+},
+{
+  "directory": "/Users/happ1s/Documents/cg-labs/build-debug",
+  "command": "/usr/bin/cc -D_GLFW_COCOA -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/include -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-build/src -g -std=c99 -arch arm64 -fPIC -Wall -o _deps/glfw-build/src/CMakeFiles/glfw.dir/cocoa_window.m.o -c /Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src/cocoa_window.m",
+  "file": "/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src/cocoa_window.m",
+  "output": "/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-build/src/CMakeFiles/glfw.dir/cocoa_window.m.o"
+},
+{
+  "directory": "/Users/happ1s/Documents/cg-labs/build-debug",
+  "command": "/usr/bin/cc -D_GLFW_COCOA -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/include -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-build/src -g -std=c99 -arch arm64 -fPIC -Wall -o _deps/glfw-build/src/CMakeFiles/glfw.dir/nsgl_context.m.o -c /Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src/nsgl_context.m",
+  "file": "/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-src/src/nsgl_context.m",
+  "output": "/Users/happ1s/Documents/cg-labs/build-debug/_deps/glfw-build/src/CMakeFiles/glfw.dir/nsgl_context.m.o"
+},
+{
+  "directory": "/Users/happ1s/Documents/cg-labs/build-debug",
+  "command": "/usr/bin/c++ -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/vk-bootstrap-src/src -isystem /Users/happ1s/VulkanSDK/1.4.321.0/macOS/include -g -std=gnu++17 -arch arm64 -Wall -Wextra -Wconversion -Wsign-conversion -o _deps/vk-bootstrap-build/CMakeFiles/vk-bootstrap.dir/src/VkBootstrap.cpp.o -c /Users/happ1s/Documents/cg-labs/build-debug/_deps/vk-bootstrap-src/src/VkBootstrap.cpp",
+  "file": "/Users/happ1s/Documents/cg-labs/build-debug/_deps/vk-bootstrap-src/src/VkBootstrap.cpp",
+  "output": "/Users/happ1s/Documents/cg-labs/build-debug/_deps/vk-bootstrap-build/CMakeFiles/vk-bootstrap.dir/src/VkBootstrap.cpp.o"
+},
+{
+  "directory": "/Users/happ1s/Documents/cg-labs/build-debug",
+  "command": "/usr/bin/c++ -I/Users/happ1s/Documents/cg-labs/include -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/imgui-src -I/Users/happ1s/Documents/cg-labs/build-debug/_deps/imgui-src/backends -isystem /Users/happ1s/VulkanSDK/1.4.321.0/macOS/include -g -std=gnu++20 -arch arm64 -o testbed/CMakeFiles/testbed.dir/main.cpp.o -c /Users/happ1s/Documents/cg-labs/testbed/main.cpp",
+  "file": "/Users/happ1s/Documents/cg-labs/testbed/main.cpp",
+  "output": "/Users/happ1s/Documents/cg-labs/build-debug/testbed/CMakeFiles/testbed.dir/main.cpp.o"
+}
+]
