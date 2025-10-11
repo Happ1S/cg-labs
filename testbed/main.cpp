@@ -7,7 +7,9 @@
 
 #include <veekay/veekay.hpp>
 
-#include <imgui.h>
+#include "imgui.h"
+#include "imgui_impl_glfw.h"
+#include "imgui_impl_vulkan.h"
 #include <vulkan/vulkan_core.h>
 
 namespace {
@@ -26,6 +28,7 @@ struct Vector {
 
 struct Vertex {
 	Vector position;
+	Vector color;
 	// NOTE: You can add more attributes
 };
 
@@ -308,15 +311,12 @@ void initialize() {
 				.format = VK_FORMAT_R32G32B32_SFLOAT, // NOTE: 3-component vector of floats
 				.offset = offsetof(Vertex, position), // NOTE: Offset of "position" field in a Vertex struct
 			},
-			// NOTE: If you want more attributes per vertex, declare them here
-#if 0
 			{
 				.location = 1, // NOTE: Second attribute
 				.binding = 0,
-				.format = VK_FORMAT_XXX,
-				.offset = offset(Vertex, your_attribute),
+				.format = VK_FORMAT_R32G32B32_SFLOAT,
+				.offset = offsetof(Vertex, color),
 			},
-#endif
 		};
 
 		// NOTE: Bring 
@@ -462,13 +462,50 @@ void initialize() {
 	//  |       \  |
 	// (v3)------(v2)
 	Vertex vertices[] = {
-		{{-1.0f, -1.0f, 0.0f}},
-		{{1.0f, -1.0f, 0.0f}},
-		{{1.0f, 1.0f, 0.0f}},
-		{{-1.0f, 1.0f, 0.0f}},
+		// back (красный) — индексы 0-3
+		{{-1, -1, -1}, {1, 0, 0}}, {{ 1, -1, -1}, {1, 0, 0}},
+		{{ 1,  1, -1}, {1, 0, 0}}, {{-1,  1, -1}, {1, 0, 0}},
+		
+		// front (зелёный) — индексы 4-7
+		{{-1, -1,  1}, {0, 1, 0}}, {{ 1, -1,  1}, {0, 1, 0}},
+		{{ 1,  1,  1}, {0, 1, 0}}, {{-1,  1,  1}, {0, 1, 0}},
+		
+		// left (синий) — индексы 8-11
+		{{-1, -1,  1}, {0, 0, 1}}, {{-1, -1, -1}, {0, 0, 1}},
+		{{-1,  1, -1}, {0, 0, 1}}, {{-1,  1,  1}, {0, 0, 1}},
+		
+		// right (жёлтый) — индексы 12-15
+		{{ 1, -1, -1}, {1, 1, 0}}, {{ 1, -1,  1}, {1, 1, 0}},
+		{{ 1,  1,  1}, {1, 1, 0}}, {{ 1,  1, -1}, {1, 1, 0}},
+		
+		// top (голубой) — индексы 16-19
+		{{-1,  1, -1}, {0, 1, 1}}, {{ 1,  1, -1}, {0, 1, 1}},
+		{{ 1,  1,  1}, {0, 1, 1}}, {{-1,  1,  1}, {0, 1, 1}},
+		
+		// bottom (фиолетовый) — индексы 20-23
+		{{-1, -1,  1}, {1, 0, 1}}, {{ 1, -1,  1}, {1, 0, 1}},
+		{{ 1, -1, -1}, {1, 0, 1}}, {{-1, -1, -1}, {1, 0, 1}}
 	};
 
-	uint32_t indices[] = { 0, 1, 2, 2, 3, 0 };
+	uint32_t indices[] = {
+		// back (красный) — как в рабочем варианте
+		0, 2, 1,   0, 3, 2,
+		
+		// front (зелёный) — как в рабочем варианте
+		4, 5, 6,   4, 6, 7,
+		
+		// left (синий) — вершины 8,9,10,11 соответствуют 4,0,3,7
+		8, 11, 10,   8, 10, 9,
+		
+		// right (жёлтый) — вершины 12,13,14,15 соответствуют 1,5,6,2
+		12, 14, 13,   12, 15, 14,
+		
+		// top (голубой) — вершины 16,17,18,19 соответствуют 3,2,6,7
+		16, 19, 18,   16, 18, 17,
+		
+		// bottom (фиолетовый) — вершины 20,21,22,23 соответствуют 4,5,1,0
+		20, 22, 21,   20, 23, 22
+	};
 
 	vertex_buffer = createBuffer(sizeof(vertices), vertices,
 	                             VK_BUFFER_USAGE_VERTEX_BUFFER_BIT);
@@ -556,17 +593,17 @@ void render(VkCommandBuffer cmd, VkFramebuffer framebuffer) {
 		vkCmdBindIndexBuffer(cmd, index_buffer.buffer, offset, VK_INDEX_TYPE_UINT32);
 
 		// NOTE: Variables like model_XXX were declared globally
-		ShaderConstants constants{
-			.projection = projection(
-				camera_fov,
-				float(veekay::app.window_width) / float(veekay::app.window_height),
-				camera_near_plane, camera_far_plane),
+		Matrix proj = projection(
+            camera_fov,
+            float(veekay::app.window_width) / float(veekay::app.window_height),
+            camera_near_plane, camera_far_plane);
 
-			.transform = multiply(rotation({0.0f, 1.0f, 0.0f}, model_rotation),
-			                      translation(model_position)),
-
-			.color = model_color,
-		};
+        ShaderConstants constants{
+            .projection = proj,
+            .transform = multiply(rotation({0.0f, 1.0f, 0.0f}, model_rotation),
+                                translation(model_position)),
+            .color = model_color,
+        };
 
 		// NOTE: Update constant memory with new shader constants
 		vkCmdPushConstants(cmd, pipeline_layout,
@@ -574,7 +611,7 @@ void render(VkCommandBuffer cmd, VkFramebuffer framebuffer) {
 		                   0, sizeof(ShaderConstants), &constants);
 
 		// NOTE: Draw 6 indices (3 vertices * 2 triangles), 1 group, no offsets
-		vkCmdDrawIndexed(cmd, 6, 1, 0, 0, 0);
+		vkCmdDrawIndexed(cmd, 36, 1, 0, 0, 0);
 	}
 
 	vkCmdEndRenderPass(cmd);
