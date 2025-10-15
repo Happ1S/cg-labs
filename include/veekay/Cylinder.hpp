@@ -10,6 +10,7 @@ struct Vector {
 
 struct Vertex {
     Vector position;
+    Vector normal;
 };
 
 class Cylinder {

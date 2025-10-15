@@ -27,6 +27,7 @@ using Vertex = geometry::Vertex;
 // NOTE: These variable will be available to shaders through push constant uniform
 struct ShaderConstants {
     Matrix projection;
+    Matrix view;
     Matrix transform;
     Vector color;
 };
@@ -64,6 +65,19 @@ Matrix identity() {
     result.m[1][1] = 1.0f;
     result.m[2][2] = 1.0f;
     result.m[3][3] = 1.0f;
+    return result;
+}
+
+Matrix perspective(float fov, float aspect, float near, float far) {
+    Matrix result{};
+    float tan_half_fov = tanf(fov / 2.0f);
+    
+    result.m[0][0] = 1.0f / (aspect * tan_half_fov);
+    result.m[1][1] = 1.0f / tan_half_fov;
+    result.m[2][2] = -(far + near) / (far - near);
+    result.m[2][3] = -1.0f;
+    result.m[3][2] = -(2.0f * far * near) / (far - near);
+    
     return result;
 }
 
@@ -276,6 +290,12 @@ void initialize() {
                 .format = VK_FORMAT_R32G32B32_SFLOAT,
                 .offset = offsetof(Vertex, position),
             },
+            {
+                .location = 1,
+                .binding = 0,
+                .format = VK_FORMAT_R32G32B32_SFLOAT,
+                .offset = offsetof(Vertex, normal),
+            },
         };
         
         VkPipelineVertexInputStateCreateInfo input_state_info{
@@ -294,8 +314,8 @@ void initialize() {
         VkPipelineRasterizationStateCreateInfo raster_info{
             .sType = VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO,
             .polygonMode = VK_POLYGON_MODE_FILL,
-            .cullMode = VK_CULL_MODE_BACK_BIT,
-            .frontFace = VK_FRONT_FACE_CLOCKWISE,
+            .cullMode = VK_CULL_MODE_NONE,
+            .frontFace = VK_FRONT_FACE_COUNTER_CLOCKWISE,
             .lineWidth = 1.0f,
         };
         
@@ -474,31 +494,30 @@ void render(VkCommandBuffer cmd, VkFramebuffer framebuffer) {
         vkCmdBindVertexBuffers(cmd, 0, 1, &vertex_buffer.buffer, &offset);
         vkCmdBindIndexBuffer(cmd, index_buffer.buffer, offset, VK_INDEX_TYPE_UINT32);
         
-        // Вычисляем позицию цилиндра на траектории (круговая траектория)
-        float x = trajectory_radius * cosf(animation_time);
-        float z = trajectory_radius * sinf(animation_time);
-        Vector position = {x, 0.0f, z};
+        // Центрируем цилиндр вокруг оси Y
+        float height = 2.0f;
+        Vector center_offset = {0.0f, -height / 2.0f, 0.0f};
         
-        // Ортографическая проекция
+        // Перспективная проекция
+        float fov = 45.0f * M_PI / 180.0f; // 45 градусов
         float aspect = float(veekay::app.window_width) / float(veekay::app.window_height);
-        float ortho_height = 5.0f;
-        float ortho_width = ortho_height * aspect;
         
-        Matrix proj = orthographic(
-            -ortho_width, ortho_width,
-            -ortho_height, ortho_height,
-            camera_near_plane, camera_far_plane
-        );
+        Matrix proj = perspective(fov, aspect, camera_near_plane, camera_far_plane);
         
-        // Трансформации: вращение, перемещение
-        Matrix transform = multiply(
-            translation(position),
-            rotation({0.0f, 1.0f, 0.0f}, cylinder_rotation)
-        );
+        // Матрица вида: камера в (0,0,5), смотрит на (0,0,0)
+        Matrix view = translation({0.0f, 0.0f, -5.0f});
+        
+        // Вращение вокруг X и Y осей одновременно для показа всех сторон
+        Matrix rotX = rotation({1.0f, 0.0f, 0.0f}, animation_time);
+        Matrix rotY = rotation({0.0f, 1.0f, 0.0f}, animation_time);
+        Matrix rot = multiply(rotX, rotY);
+        
+        Matrix model = multiply(translation(center_offset), rot);
         
         ShaderConstants constants{
             .projection = proj,
-            .transform = transform,
+            .view = view,
+            .transform = model,
             .color = cylinder_color,
         };
         
