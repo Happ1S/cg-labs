@@ -145,6 +145,14 @@ Matrix multiply(const Matrix& a, const Matrix& b) {
     return result;
 }
 
+Vector multiply(const Matrix& m, const Vector& v) {
+    Vector result;
+    result.x = m.m[0][0] * v.x + m.m[0][1] * v.y + m.m[0][2] * v.z + m.m[0][3];
+    result.y = m.m[1][0] * v.x + m.m[1][1] * v.y + m.m[1][2] * v.z + m.m[1][3];
+    result.z = m.m[2][0] * v.x + m.m[2][1] * v.y + m.m[2][2] * v.z + m.m[2][3];
+    return result;
+}
+
 VkShaderModule loadShaderModule(const char* path) {
     std::ifstream file(path, std::ios::binary | std::ios::ate);
     size_t size = file.tellg();
@@ -498,6 +506,16 @@ void render(VkCommandBuffer cmd, VkFramebuffer framebuffer) {
         float height = 2.0f;
         Vector center_offset = {0.0f, -height / 2.0f, 0.0f};
         
+        // Сложная траектория в форме восьмерки с замедлениями и ускорениями
+        float phase = animation_time + 0.2f * sinf(2.0f * animation_time); // Добавляем вариацию скорости
+        float x = trajectory_radius * sinf(phase);
+        float z = trajectory_radius * 0.5f * sinf(2.0f * phase); // Форма восьмерки
+        Vector orbital_pos = {x, 0.0f, z - 1};
+        
+        // Наклон траектории (поворот вокруг X на 30 градусов)
+        Matrix tilt = rotation({1.0f, 0.0f, 0.0f}, M_PI / 6.0f); // 30 градусов
+        Vector tilted_pos = multiply(tilt, orbital_pos);
+        
         // Перспективная проекция
         float fov = 45.0f * M_PI / 180.0f; // 45 градусов
         float aspect = float(veekay::app.window_width) / float(veekay::app.window_height);
@@ -507,12 +525,8 @@ void render(VkCommandBuffer cmd, VkFramebuffer framebuffer) {
         // Матрица вида: камера в (0,0,5), смотрит на (0,0,0)
         Matrix view = translation({0.0f, 0.0f, -5.0f});
         
-        // Вращение вокруг X и Y осей одновременно для показа всех сторон
-        Matrix rotX = rotation({1.0f, 0.0f, 0.0f}, animation_time);
-        Matrix rotY = rotation({0.0f, 1.0f, 0.0f}, animation_time);
-        Matrix rot = multiply(rotX, rotY);
-        
-        Matrix model = multiply(translation(center_offset), rot);
+        // Модель: перевод на позицию траектории + центрирование
+        Matrix model = multiply(translation(tilted_pos), rotation({1.0f, 0.0f, 0.0f}, -M_PI / 5.0f));
         
         ShaderConstants constants{
             .projection = proj,
