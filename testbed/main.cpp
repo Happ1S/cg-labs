@@ -13,8 +13,8 @@
 
 namespace {
 
-constexpr float camera_near_plane = 0.01f;
-constexpr float camera_far_plane = 100.0f;
+float camera_near_plane = 0.01f;
+float camera_far_plane = 100.0f;
 
 struct Matrix {
     float m[4][4];
@@ -458,6 +458,7 @@ void update(double time) {
     ImGui::Separator();
     ImGui::ColorEdit3("Cylinder Color", reinterpret_cast<float*>(&cylinder_color));
     ImGui::SliderFloat("Cylinder Rotation", &cylinder_rotation, 0.0f, 2.0f * M_PI);
+    ImGui::Separator();
     ImGui::End();
     
     if (animate) {
@@ -516,12 +517,13 @@ void render(VkCommandBuffer cmd, VkFramebuffer framebuffer) {
         Matrix tilt = rotation({1.0f, 0.0f, 0.0f}, M_PI / 6.0f); // 30 градусов
         Vector tilted_pos = multiply(tilt, orbital_pos);
         
-        // Перспективная проекция
-        float fov = 45.0f * M_PI / 180.0f; // 45 градусов
+        // Проекционная матрица
         float aspect = float(veekay::app.window_width) / float(veekay::app.window_height);
-        
-        Matrix proj = perspective(fov, aspect, camera_near_plane, camera_far_plane);
-        
+        Matrix proj;
+        float ortho_half_width = 5.0f * aspect;
+        float ortho_half_height = 5.0f;
+        proj = orthographic(-ortho_half_width, ortho_half_width, -ortho_half_height, ortho_half_height, -10.0f, camera_far_plane);
+
         // Матрица вида: камера в (0,0,5), смотрит на (0,0,0)
         Matrix view = translation({0.0f, 0.0f, -5.0f});
         
