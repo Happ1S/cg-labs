@@ -5,11 +5,14 @@ project(veekay LANGUAGES C CXX)
 
 add_library(${PROJECT_NAME}
 	source/veekay.cpp
-	source/Cylinder.cpp
- )
+	source/geometry/Cube.cpp
+	source/geometry/Plane.cpp
+	source/geometry/Sphere.cpp
+	source/geometry/Cylinder.cpp
+)
 
 target_include_directories(${PROJECT_NAME} PUBLIC
-    $<BUILD_INTERFACE:${veekay_SOURCE_DIR}/include>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:include>
 )
 
@@ -37,7 +40,13 @@ FetchContent_Declare(
 FetchContent_Declare(
 	imgui
 	GIT_REPOSITORY https://github.com/ocornut/imgui
-	GIT_TAG v1.92.3
+	GIT_TAG v1.90.8
+)
+
+FetchContent_Declare(
+    glm
+    GIT_REPOSITORY https://github.com/g-truc/glm.git
+    GIT_TAG 1.0.1
 )
 
 find_package(Vulkan REQUIRED)
@@ -47,14 +56,17 @@ set(GLFW_BUILD_EXAMPLES OFF)
 set(GLFW_BUILD_TESTS OFF)
 set(GLFW_BUILD_DOCS OFF)
 
-FetchContent_MakeAvailable(glfw vk-bootstrap imgui)
+FetchContent_MakeAvailable(glfw vk-bootstrap imgui glm)
 
 add_subdirectory(testbed)
 
-target_link_libraries(${PROJECT_NAME} PRIVATE
-	glfw
-	Vulkan::Vulkan
-	vk-bootstrap::vk-bootstrap
+target_link_libraries(${PROJECT_NAME}
+    PUBLIC
+        Vulkan::Vulkan
+    PRIVATE
+        glfw
+        vk-bootstrap::vk-bootstrap
+        glm
 )
 
 # Link ImGui
@@ -66,4 +78,5 @@ target_sources(${PROJECT_NAME} PRIVATE
 	${imgui_SOURCE_DIR}/imgui_draw.cpp
 	${imgui_SOURCE_DIR}/imgui_tables.cpp
 	${imgui_SOURCE_DIR}/imgui_widgets.cpp
+	${imgui_SOURCE_DIR}/imgui_demo.cpp
 )

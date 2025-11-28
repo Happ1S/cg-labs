@@ -7,5 +7,8 @@
 
   // Use compileCommands to provide include directories to the linter.
   "cmake.copyCompileCommands": "${workspaceFolder}/compile_commands.json",
-  "C_Cpp.default.compileCommands": "${workspaceFolder}/compile_commands.json"
+  "C_Cpp.default.compileCommands": "${workspaceFolder}/compile_commands.json",
+  "files.associations": {
+    "stdexcept": "cpp"
+  }
 }

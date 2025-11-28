@@ -97,6 +97,8 @@ int veekay::run(const veekay::ApplicationInfo& app_info) {
 	veekay::app.window_width = static_cast<uint32_t>(framebuffer_width);
 	veekay::app.window_height = static_cast<uint32_t>(framebuffer_height);
 
+	veekay::app.window = window;
+	std::cout << "DEBUG: veekay::app.window = " << veekay::app.window << std::endl;
 	{ // NOTE: Initialize Vulkan: grab device and create swapchain
 		vkb::InstanceBuilder instance_builder;
 
@@ -200,7 +202,7 @@ int veekay::run(const veekay::ApplicationInfo& app_info) {
 		{
 			VkDescriptorPoolSize size = {
 				.type = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
-				.descriptorCount = IMGUI_IMPL_VULKAN_MINIMUM_IMAGE_SAMPLER_POOL_SIZE,
+				.descriptorCount = 1000,
 			};
 
 			VkDescriptorPoolCreateInfo info = {

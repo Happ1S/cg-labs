@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vulkan/vulkan_core.h>
+#include <GLFW/glfw3.h>
 
 namespace veekay {
 
@@ -16,6 +17,8 @@ struct Application {
 	VkDevice vk_device;
 	VkPhysicalDevice vk_physical_device;
 	VkRenderPass vk_render_pass;
+
+	GLFWwindow* window;
 
 	bool running;
 };
