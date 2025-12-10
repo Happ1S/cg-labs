@@ -23,8 +23,8 @@ if(GLSLC_FOUND)
 		list(APPEND _SHADER_BINARIES ${SHADER_BINARY_PATH})
 	endmacro()
 
-	compile_shader(city.vert)
-	compile_shader(city.frag)
+	compile_shader(simple.vert)
+	compile_shader(simple.frag)
 
 	add_custom_target(shaders DEPENDS ${_SHADER_BINARIES})
 	add_dependencies(${PROJECT_NAME} shaders)
