@@ -17,6 +17,8 @@ struct Application {
 	VkDevice vk_device;
 	VkPhysicalDevice vk_physical_device;
 	VkRenderPass vk_render_pass;
+	VkCommandPool vk_command_pool;
+	VkQueue vk_graphics_queue;
 
 	GLFWwindow* window;
 

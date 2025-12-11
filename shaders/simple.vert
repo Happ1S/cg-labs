@@ -6,9 +6,11 @@ layout(location = 2) in vec2 inUV;
 
 layout(location = 0) out vec3 fragNormal;
 layout(location = 1) out vec3 fragWorldPos;
-layout(location = 2) out vec3 fragColor;
-layout(location = 3) out float fragMetallic;
-layout(location = 4) out float fragRoughness;
+layout(location = 2) out vec2 fragUV;          
+layout(location = 3) out vec3 fragColor;       
+layout(location = 4) out float fragMetallic;   
+layout(location = 5) out float fragRoughness;  
+layout(location = 6) out float fragUseTexture; 
 
 layout(binding = 0) uniform SceneUBO {
     mat4 projection;
@@ -22,6 +24,8 @@ layout(push_constant) uniform PushConstants {
     vec4 color;
     float metallic;
     float roughness;
+    vec2 uvScale;
+    float useTexture;
 } push;
 
 void main() {
@@ -30,7 +34,9 @@ void main() {
     
     fragWorldPos = worldPos.xyz;
     fragNormal = normalize(mat3(push.normalMatrix) * inNormal);
-    fragColor = push.color.rgb;
+    fragUV = inUV * push.uvScale;     // Scaling UVs for tiling
+    fragColor = push.color.rgb;       // Pass base color to fragment shader
     fragMetallic = push.metallic;
     fragRoughness = push.roughness;
+    fragUseTexture = push.useTexture; // Pass the texture toggle flag
 }

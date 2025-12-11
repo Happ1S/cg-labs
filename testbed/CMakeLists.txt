@@ -7,6 +7,8 @@ set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD_REQUIRED TRUE CXX_
 # Теперь testbed явно знает о veekay, glm, Vulkan и glfw, и получит все нужные пути.
 target_link_libraries(${PROJECT_NAME} PRIVATE veekay glm Vulkan::Vulkan glfw)
 
+target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/include)
+
 find_program(GLSLC_FOUND glslc)
 if(GLSLC_FOUND)
 	set(_SHADER_BINARIES)

@@ -183,6 +183,7 @@ int veekay::run(const veekay::ApplicationInfo& app_info) {
 
 		veekay::app.vk_device = vk_device;
 		veekay::app.vk_physical_device = vk_physical_device;
+		veekay::app.vk_graphics_queue = vk_graphics_queue;
 	}
 
 	{ // NOTE: ImGui initialization
@@ -581,6 +582,7 @@ int veekay::run(const veekay::ApplicationInfo& app_info) {
 			std::cerr << "Failed to create Vulkan command pool\n";
 			return 1;
 		}
+		veekay::app.vk_command_pool = vk_command_pool;
 	}
 
 	{ // NOTE: Allocate command buffers

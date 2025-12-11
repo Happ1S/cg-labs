@@ -9,10 +9,12 @@ add_library(${PROJECT_NAME}
 	source/geometry/Plane.cpp
 	source/geometry/Sphere.cpp
 	source/geometry/Cylinder.cpp
+	source/graphics/Texture.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/veekay/stb_image>
     $<INSTALL_INTERFACE:include>
 )
 
