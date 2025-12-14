@@ -13,11 +13,13 @@ layout(location = 3) out vec3 fragColor;       // Цвет
 layout(location = 4) out float fragMetallic;   // Металличность
 layout(location = 5) out float fragRoughness;  // Шероховатость
 layout(location = 6) out float fragUseTexture; // Флаг текстуры
+layout(location = 7) out vec4 fragLightSpacePos; // Позиция в пространстве света (для теней)
 
-layout(binding = 0) uniform SceneUBO {
+layout(std140, binding = 0) uniform SceneUBO {
     mat4 projection;
     mat4 view;
     vec3 viewPos;
+    mat4 lightSpaceMatrix; // Матрица для преобразования в пространство света
 } scene;
 
 layout(push_constant) uniform PushConstants {
@@ -43,5 +45,8 @@ void main() {
     fragColor = push.color.rgb;       
     fragMetallic = push.metallic;
     fragRoughness = push.roughness;
-    fragUseTexture = push.useTexture; 
+    fragUseTexture = push.useTexture;
+    
+    // Вычисляем позицию в пространстве света для shadow mapping
+    fragLightSpacePos = scene.lightSpaceMatrix * worldPos;
 }

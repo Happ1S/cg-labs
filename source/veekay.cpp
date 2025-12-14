@@ -1,10 +1,12 @@
 #include <cstdint>
 #include <climits>
 #include <iostream>
+#include <cstring>
 
 #include <vector>
 
 #include <vulkan/vulkan_core.h>
+#include <vulkan/vulkan.h>  // Для типов функций swapchain
 
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
@@ -135,51 +137,211 @@ int veekay::run(const veekay::ApplicationInfo& app_info) {
 		auto physical_device = selector_result.value();
 
 		{
-			vkb::DeviceBuilder device_builder(physical_device);
-
-			auto result = device_builder.build();
-
-			if (!result) {
-				std::cerr << result.error().message() << '\n';
+			// Всегда создаем устройство вручную с нужными расширениями
+			// Это гарантирует, что все расширения будут включены правильно
+			const char* dynamic_rendering_ext = "VK_KHR_dynamic_rendering";
+			const char* portability_subset_ext = "VK_KHR_portability_subset";
+			const char* swapchain_ext = "VK_KHR_swapchain";
+			
+			// Проверяем поддержку расширений
+			uint32_t extension_count = 0;
+			vkEnumerateDeviceExtensionProperties(physical_device.physical_device, nullptr, &extension_count, nullptr);
+			std::vector<VkExtensionProperties> available_extensions(extension_count);
+			vkEnumerateDeviceExtensionProperties(physical_device.physical_device, nullptr, &extension_count, available_extensions.data());
+			
+			bool has_dynamic_rendering = false;
+			bool has_portability_subset = false;
+			bool has_swapchain = false;
+			for (const auto& ext : available_extensions) {
+				if (strcmp(ext.extensionName, dynamic_rendering_ext) == 0) {
+					has_dynamic_rendering = true;
+				}
+				if (strcmp(ext.extensionName, portability_subset_ext) == 0) {
+					has_portability_subset = true;
+				}
+				if (strcmp(ext.extensionName, swapchain_ext) == 0) {
+					has_swapchain = true;
+				}
+			}
+			
+			if (!has_swapchain) {
+				std::cerr << "Fatal: VK_KHR_swapchain extension not supported!\n";
 				return 1;
 			}
-
-			auto device = result.value();
-
-			vk_device = device.device;
-			vk_physical_device = device.physical_device;
-
-			auto queue_type = vkb::QueueType::graphics;
 			
-			vk_graphics_queue = device.get_queue(queue_type).value();
-			vk_graphics_queue_family = device.get_queue_index(queue_type).value();
+			// Получаем информацию о queue families
+			uint32_t queue_family_count = 0;
+			vkGetPhysicalDeviceQueueFamilyProperties(physical_device.physical_device, &queue_family_count, nullptr);
+			std::vector<VkQueueFamilyProperties> queue_families(queue_family_count);
+			vkGetPhysicalDeviceQueueFamilyProperties(physical_device.physical_device, &queue_family_count, queue_families.data());
+			
+			// Находим graphics queue family, которая поддерживает present
+			uint32_t graphics_queue_family = UINT32_MAX;
+			for (uint32_t i = 0; i < queue_family_count; i++) {
+				VkBool32 present_support = false;
+				vkGetPhysicalDeviceSurfaceSupportKHR(physical_device.physical_device, i, vk_surface, &present_support);
+				if ((queue_families[i].queueFlags & VK_QUEUE_GRAPHICS_BIT) && present_support && queue_families[i].queueCount > 0) {
+					graphics_queue_family = i;
+					break;
+				}
+			}
+			
+			if (graphics_queue_family == UINT32_MAX) {
+				std::cerr << "Failed to find graphics queue family with present support!\n";
+				return 1;
+			}
+			
+			// Создаем устройство с расширениями
+			float queue_priority = 1.0f;
+			VkDeviceQueueCreateInfo queue_create_info{
+				.sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO,
+				.queueFamilyIndex = graphics_queue_family,
+				.queueCount = 1,
+				.pQueuePriorities = &queue_priority
+			};
+			
+			std::vector<const char*> extensions_to_enable;
+			extensions_to_enable.push_back(swapchain_ext); // Обязательно
+			if (has_portability_subset) {
+				extensions_to_enable.push_back(portability_subset_ext);
+			}
+			if (has_dynamic_rendering) {
+				extensions_to_enable.push_back(dynamic_rendering_ext);
+			}
+			
+			VkDeviceCreateInfo device_create_info{
+				.sType = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO,
+				.queueCreateInfoCount = 1,
+				.pQueueCreateInfos = &queue_create_info,
+				.enabledExtensionCount = static_cast<uint32_t>(extensions_to_enable.size()),
+				.ppEnabledExtensionNames = extensions_to_enable.data()
+			};
+			
+			if (vkCreateDevice(physical_device.physical_device, &device_create_info, nullptr, &vk_device) != VK_SUCCESS) {
+				std::cerr << "Failed to create Vulkan device!\n";
+				return 1;
+			}
+			
+			if (!has_dynamic_rendering) {
+				std::cerr << "WARNING: VK_KHR_dynamic_rendering extension not supported by device!" << std::endl;
+				std::cerr << "  Shadow mapping will not work. This is common on macOS with MoltenVK." << std::endl;
+			} else {
+				std::cerr << "INFO: VK_KHR_dynamic_rendering extension is available and will be enabled." << std::endl;
+			}
+			
+			vk_physical_device = physical_device.physical_device;
+			vkGetDeviceQueue(vk_device, graphics_queue_family, 0, &vk_graphics_queue);
+			vk_graphics_queue_family = graphics_queue_family;
 		}
 
-		vkb::SwapchainBuilder swapchain_builder(vk_physical_device, vk_device, vk_surface);
-
-		vk_swapchain_format = VK_FORMAT_B8G8R8A8_UNORM;
-
-		VkSurfaceFormatKHR surface_format{
-			.format = vk_swapchain_format,
-			.colorSpace = VK_COLOR_SPACE_SRGB_NONLINEAR_KHR,
-		};
-
-		auto swapchain_result = swapchain_builder.set_desired_format(surface_format)
-		                                         .set_desired_present_mode(VK_PRESENT_MODE_FIFO_KHR)
-		                                         .set_desired_extent(veekay::app.window_width, veekay::app.window_height)
-		                                         .add_image_usage_flags(VK_IMAGE_USAGE_TRANSFER_DST_BIT)
-		                                         .build();
-
-		if (!swapchain_result) {
-			std::cerr << swapchain_result.error().message() << '\n';
+		// Создаем swapchain вручную, так как устройство создано вручную
+		// Загружаем функции swapchain
+		PFN_vkCreateSwapchainKHR vkCreateSwapchainKHR = 
+			reinterpret_cast<PFN_vkCreateSwapchainKHR>(vkGetDeviceProcAddr(vk_device, "vkCreateSwapchainKHR"));
+		PFN_vkGetSwapchainImagesKHR vkGetSwapchainImagesKHR = 
+			reinterpret_cast<PFN_vkGetSwapchainImagesKHR>(vkGetDeviceProcAddr(vk_device, "vkGetSwapchainImagesKHR"));
+		
+		if (!vkCreateSwapchainKHR || !vkGetSwapchainImagesKHR) {
+			std::cerr << "Failed to load swapchain functions!\n";
 			return 1;
 		}
-
-		auto swapchain = swapchain_result.value();
-
-		vk_swapchain = swapchain.swapchain;
-		vk_swapchain_images = swapchain.get_images().value();
-		vk_swapchain_image_views = swapchain.get_image_views().value();
+		
+		// Получаем возможности поверхности
+		VkSurfaceCapabilitiesKHR capabilities;
+		vkGetPhysicalDeviceSurfaceCapabilitiesKHR(vk_physical_device, vk_surface, &capabilities);
+		
+		// Получаем доступные форматы
+		uint32_t format_count;
+		vkGetPhysicalDeviceSurfaceFormatsKHR(vk_physical_device, vk_surface, &format_count, nullptr);
+		std::vector<VkSurfaceFormatKHR> formats(format_count);
+		vkGetPhysicalDeviceSurfaceFormatsKHR(vk_physical_device, vk_surface, &format_count, formats.data());
+		
+		// Выбираем формат
+		VkSurfaceFormatKHR surface_format = formats[0];
+		for (const auto& format : formats) {
+			if (format.format == VK_FORMAT_B8G8R8A8_UNORM && format.colorSpace == VK_COLOR_SPACE_SRGB_NONLINEAR_KHR) {
+				surface_format = format;
+				break;
+			}
+		}
+		vk_swapchain_format = surface_format.format;
+		
+		// Получаем доступные present modes
+		uint32_t present_mode_count;
+		vkGetPhysicalDeviceSurfacePresentModesKHR(vk_physical_device, vk_surface, &present_mode_count, nullptr);
+		std::vector<VkPresentModeKHR> present_modes(present_mode_count);
+		vkGetPhysicalDeviceSurfacePresentModesKHR(vk_physical_device, vk_surface, &present_mode_count, present_modes.data());
+		
+		VkPresentModeKHR present_mode = VK_PRESENT_MODE_FIFO_KHR;
+		for (const auto& mode : present_modes) {
+			if (mode == VK_PRESENT_MODE_FIFO_KHR) {
+				present_mode = mode;
+				break;
+			}
+		}
+		
+		// Определяем количество изображений в swapchain
+		uint32_t image_count = capabilities.minImageCount + 1;
+		if (capabilities.maxImageCount > 0 && image_count > capabilities.maxImageCount) {
+			image_count = capabilities.maxImageCount;
+		}
+		
+		// Создаем swapchain
+		VkSwapchainCreateInfoKHR swapchain_create_info{
+			.sType = VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR,
+			.surface = vk_surface,
+			.minImageCount = image_count,
+			.imageFormat = surface_format.format,
+			.imageColorSpace = surface_format.colorSpace,
+			.imageExtent = {veekay::app.window_width, veekay::app.window_height},
+			.imageArrayLayers = 1,
+			.imageUsage = VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT | VK_IMAGE_USAGE_TRANSFER_DST_BIT,
+			.imageSharingMode = VK_SHARING_MODE_EXCLUSIVE,
+			.preTransform = capabilities.currentTransform,
+			.compositeAlpha = VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR,
+			.presentMode = present_mode,
+			.clipped = VK_TRUE,
+			.oldSwapchain = VK_NULL_HANDLE
+		};
+		
+		if (vkCreateSwapchainKHR(vk_device, &swapchain_create_info, nullptr, &vk_swapchain) != VK_SUCCESS) {
+			std::cerr << "Failed to create swapchain!\n";
+			return 1;
+		}
+		
+		// Получаем изображения swapchain
+		vkGetSwapchainImagesKHR(vk_device, vk_swapchain, &image_count, nullptr);
+		vk_swapchain_images.resize(image_count);
+		vkGetSwapchainImagesKHR(vk_device, vk_swapchain, &image_count, vk_swapchain_images.data());
+		
+		// Создаем image views
+		vk_swapchain_image_views.resize(vk_swapchain_images.size());
+		for (size_t i = 0; i < vk_swapchain_images.size(); i++) {
+			VkImageViewCreateInfo view_info{
+				.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO,
+				.image = vk_swapchain_images[i],
+				.viewType = VK_IMAGE_VIEW_TYPE_2D,
+				.format = vk_swapchain_format,
+				.components = {
+					.r = VK_COMPONENT_SWIZZLE_IDENTITY,
+					.g = VK_COMPONENT_SWIZZLE_IDENTITY,
+					.b = VK_COMPONENT_SWIZZLE_IDENTITY,
+					.a = VK_COMPONENT_SWIZZLE_IDENTITY
+				},
+				.subresourceRange = {
+					.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT,
+					.baseMipLevel = 0,
+					.levelCount = 1,
+					.baseArrayLayer = 0,
+					.layerCount = 1
+				}
+			};
+			
+			if (vkCreateImageView(vk_device, &view_info, nullptr, &vk_swapchain_image_views[i]) != VK_SUCCESS) {
+				std::cerr << "Failed to create image view " << i << "!\n";
+				return 1;
+			}
+		}
 
 		veekay::app.vk_device = vk_device;
 		veekay::app.vk_physical_device = vk_physical_device;
