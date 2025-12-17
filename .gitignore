@@ -3,3 +3,5 @@ build/
 shaders/*.spv
 imgui.ini
 .cache/*
+.vscode
+.DS_Store

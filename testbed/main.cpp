@@ -1517,7 +1517,7 @@ void render(VkCommandBuffer cmd, VkFramebuffer framebuffer) {
         push.color = glm::vec4(1.5f, 1.5f, 1.5f, 1.0f);
         // Глянцевая белая краска — почти диэлектрик, но очень гладкая.
         // База: белая краска (нужен diffuse, иначе машина выглядит чёрной кроме блика).
-        push.metallic = 0.05f;
+        push.metallic = 0.5f;
         push.roughness = 0.10f;
         
         // ТЕКСТУРИРОВАНИЕ МАШИНЫ:
@@ -1536,7 +1536,7 @@ void render(VkCommandBuffer cmd, VkFramebuffer framebuffer) {
         push.model = glm::scale(push.model, glm::vec3(0.7f, 0.35f, 0.9f));
         push.normalMatrix = glm::mat4(glm::transpose(glm::inverse(glm::mat3(push.model))));
         push.color = glm::vec4(1.5f, 1.5f, 1.5f, 1.0f);
-        push.metallic = 0.05f;
+        push.metallic = 0.5f;
         push.roughness = 0.10f;
         push.uvScale = glm::vec2(1.0f, 1.0f); 
         push.useTexture = 2.0f; // текстура + clearcoat (лак)
